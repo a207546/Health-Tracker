@@ -194,7 +194,7 @@ fun ExerciseSection() {
         elevation = CardDefaults.cardElevation(4.dp),
         //可直接修改的形状参数：当前为16dp圆角，可自行调整数值/形状
         shape = RoundedCornerShape(100.dp),
-        // 👇 单独设置此卡片颜色
+        // 卡片颜色
         colors = CardDefaults.cardColors(containerColor = Color(0xFF383838))
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
@@ -216,7 +216,7 @@ fun ExerciseSection() {
                 )
             }
 
-            // 展开显示运动数据
+            // 显示运动数据
             if (expanded) {
                 Spacer(modifier = Modifier.height(20.dp))
                 Row(
@@ -245,8 +245,8 @@ fun ExerciseItem(value: String, unit: String) {
     }
 }
 
-//替换为Material3 Card组件
-//添加点击展开/收起动画
+
+//展开/收起动画
 @Composable
 fun HeartRateCard() {
     var expanded by remember { mutableStateOf(false) }
@@ -257,9 +257,9 @@ fun HeartRateCard() {
             .animateContentSize()
             .clickable { expanded = !expanded },
         elevation = CardDefaults.cardElevation(4.dp),
-        // 👇 可直接修改的形状参数：当前为16dp圆角，可自行调整数值/形状
+        // 修改形状
         shape = RoundedCornerShape(16.dp),
-        // 👇 单独设置此卡片颜色
+        // 颜色
         colors = CardDefaults.cardColors(containerColor = Color(0xFF424242))
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
@@ -313,8 +313,8 @@ fun HeartRateCard() {
     }
 }
 
-//替换为Material3 Card组件
-//添加点击展开/收起动画
+
+//展开/收起动画
 @Composable
 fun WaterTrackerCard() {
     var expanded by remember { mutableStateOf(false) }
@@ -327,9 +327,9 @@ fun WaterTrackerCard() {
             .animateContentSize()
             .clickable { expanded = !expanded },
         elevation = CardDefaults.cardElevation(4.dp),
-        // 👇 可直接修改的形状参数：当前为16dp圆角，可自行调整数值/形状
+        
         shape = RoundedCornerShape(16.dp),
-        // 👇 单独设置此卡片颜色
+    
         colors = CardDefaults.cardColors(containerColor = Color(0xFF4A4A4A))
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
