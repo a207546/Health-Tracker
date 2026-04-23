@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             //  控制白天/黑夜模式（默认 true = 黑夜）
-            val darkMode = false   //   false
+            val darkMode = true   //   false
 
             // 主题自动根据 darkMode 变化
             HealthTrackerTheme(darkMode = darkMode) {
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
 
-                    // 【Lab4 新增】导航控制器（管理页面跳转）
+                    // Lab4 新增导航控制器（管理页面跳转）
 
                     val navController = rememberNavController()
 
@@ -62,9 +62,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// ------------------------------
+
 // Lab4 新增导航：管理3个页面跳转
-// ------------------------------
+
 @Composable
 fun AppNavHost(
     navController: NavHostController,
@@ -90,7 +90,10 @@ fun AppNavHost(
 
 // 背景布局
 @Composable
-fun BackgroundWithImage(content: @Composable () -> Unit) {
+fun BackgroundWithImage(
+    darkMode: Boolean,
+    content: @Composable () -> Unit
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.background),
@@ -99,7 +102,10 @@ fun BackgroundWithImage(content: @Composable () -> Unit) {
             contentScale = ContentScale.Crop
         )
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                // 遮罩黑夜模式加黑色遮罩，白天模式不加
+                .background(if (darkMode) Color(0x99000000) else Color.Transparent),
             verticalArrangement = Arrangement.Top
         ) {
             content()
@@ -114,7 +120,8 @@ fun HomeScreen(
     viewModel: HealthViewModel,
     darkMode: Boolean
 ) {
-    BackgroundWithImage {
+    // 传入 darkMode，让背景在黑夜自动加遮罩
+    BackgroundWithImage(darkMode = darkMode) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -478,8 +485,13 @@ fun BottomNavigationBar(navController: NavHostController) {
 // Lab4 新增第二个页面健康数据统计
 
 @Composable
-fun StatsScreen(navController: NavHostController, viewModel: HealthViewModel, darkMode: Boolean) {
-    BackgroundWithImage {
+fun StatsScreen(
+    navController: NavHostController,
+    viewModel: HealthViewModel,
+    darkMode: Boolean
+) {
+    // 传入 darkMode，恢复遮罩
+    BackgroundWithImage(darkMode = darkMode) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -511,8 +523,13 @@ fun StatsScreen(navController: NavHostController, viewModel: HealthViewModel, da
 // Lab4 新增第三个页面：设置页
 
 @Composable
-fun SettingsScreen(navController: NavHostController, viewModel: HealthViewModel, darkMode: Boolean) {
-    BackgroundWithImage {
+fun SettingsScreen(
+    navController: NavHostController,
+    viewModel: HealthViewModel,
+    darkMode: Boolean
+) {
+    // 传入 darkMode，恢复遮罩
+    BackgroundWithImage(darkMode = darkMode) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
